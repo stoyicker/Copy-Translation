@@ -1,0 +1,28 @@
+{
+  "name": "Copy Translation",
+  "version": "1",
+  "manifest_version": 2,
+  "description": "Have your translated text automatically copied to the clipboard!",
+  "icons": {
+    "16": "icons/icon-16.png",
+    "32": "icons/icon-32.png",
+    "64": "icons/icon-64.png",
+    "128": "icons/icon-128.png"
+  },
+  "author": "Jorge Antonio Diaz-Benito Soriano",
+  "page_action": {
+    "default_title": "Copy Translation",
+    "default_icon": {
+      "19": "icons/icon-19.png",
+      "38": "icons/icon-38.png"
+    }
+  },
+  "content_scripts": [{
+    "matches": ["*://translate.google.com/*"],
+    "js": ["scripts/jquery-2.1.3.min.js", "scripts/copy.js"],
+    "run_at": "document_end"
+  }],
+  "permissions": [
+    "clipboardWrite"
+  ]
+}
