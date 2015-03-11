@@ -15,5 +15,6 @@
     }
     ],
     "permissions": [ "clipboardWrite",
-    "clipboardRead"]
+    "clipboardRead"],
+    "web_accesible_resources": ["templates/*"]
 }
