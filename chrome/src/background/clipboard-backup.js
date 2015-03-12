@@ -1,5 +1,5 @@
 /*global chrome, alert, console, $*/
-chrome.tabs.onActivated.addListener(function (activeInfo) {
+var requestBackup = function (activeInfo) {
     "use strict";
     chrome.tabs.query({
         active: true,
@@ -11,4 +11,7 @@ chrome.tabs.onActivated.addListener(function (activeInfo) {
             console.log("Performed clipboard backup.");
         });
     });
-});
+};
+
+chrome.tabs.onActivated.addListener(requestBackup);
+chrome.windows.onFocusChanged.addListener(requestBackup);

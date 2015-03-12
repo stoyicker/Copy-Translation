@@ -14,7 +14,9 @@
     },
     "background": {
         "scripts": [
-            "src/clipboard-backup.js"
+            "src/background/clipboard-backup.js",
+            "src/background/toast-css.js",
+            "src/background/toast-html.js"
         ]
     },
     "author": "Jorge Antonio Diaz-Benito Soriano",
@@ -28,9 +30,10 @@
     "content_scripts": [
         {
             "matches": ["*://translate.google.com/*"],
-            "js": ["src/common/jquery-2.1.3.min.js", "src/common/clipboard.js", "src/scripts/google-translate.js", "src/background/clipboard-backup.js"],
+            "js": ["src/common/jquery-2.1.3.min.js", "src/common/clipboard.js", "src/scripts/google-translate.js"],
             "run_at": "document_end"
         }
     ],
-    "permissions": ["clipboardWrite", "clipboardRead"]
+    "permissions": ["clipboardWrite", "clipboardRead"],
+    "web_accessible_resources": ["templates/toast.html"]
 }

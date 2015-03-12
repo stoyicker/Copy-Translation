@@ -1,5 +1,4 @@
 /*global chrome, console*/
-
 chrome.tabs.insertCSS({
     file: "css/toast.css"
 }, function () {

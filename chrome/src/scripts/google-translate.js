@@ -1,12 +1,8 @@
-/*global $, chrome, alert, console*/
+/*global $, chrome, alert, console, readClipboard, copyTextToClipboard*/
 
 var srcBox = document.getElementById("source"),
     resultBox = document.getElementById("result_box"),
-    toInject = chrome.extension.getURL("templates/toast.html"),
-    toast = document.createElement("div"),
     oldClipboardText;
-
-toast.innerHTML = "hola";
 
 chrome.runtime.onMessage.addListener(
     function (request, sender, sendResponse) {
@@ -17,11 +13,15 @@ chrome.runtime.onMessage.addListener(
     }
 );
 
-document.body.appendChild(toast);
 resultBox.addEventListener("DOMNodeInserted", function () {
     "use strict";
     copyTextToClipboard(resultBox.innerText);
     srcBox.focus();
 }, false);
 
-alert(toInject);
+chrome.extension.sendRequest({
+    cmd: "append_toast"
+}, function (html) {
+    "use strict";
+    $('body').html(html);
+});
