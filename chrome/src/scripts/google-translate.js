@@ -5,11 +5,22 @@ var srcBox = document.getElementById("source"),
     oldClipboardText;
 
 chrome.runtime.onMessage.addListener(
-    function (request, sender, sendResponse) {
+    function (message, sender, sendResponse) {
         "use strict";
-        console.log("Received a backup request");
-        oldClipboardText = readClipboard();
-        console.log("Clipboard contents stored: " + oldClipboardText);
+        if (message.request === "backup") {
+            console.log("Received a backup request");
+            oldClipboardText = readClipboard();
+            console.log("Clipboard contents stored: " + oldClipboardText);
+        }
+    }
+);
+
+chrome.runtime.onMessage.addListener(
+    function (message, sender, sendResponse) {
+        "use strict";
+        if (message.request === "file_retrieved") {
+            alert("File contents: " + message.data);
+        }
     }
 );
 
@@ -19,9 +30,7 @@ resultBox.addEventListener("DOMNodeInserted", function () {
     srcBox.focus();
 }, false);
 
-chrome.extension.sendRequest({
-    cmd: "append_toast"
-}, function (html) {
-    "use strict";
-    $('body').html(html);
+chrome.runtime.sendMessage({
+    request: "retrieve_file",
+    fileName: "templates/toast.html"
 });
