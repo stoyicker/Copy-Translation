@@ -8,31 +8,6 @@ var srcBox = document.getElementById("source"),
 
 toast.innerHTML = "hola";
 
-function readClipboard() {
-    "use strict";
-    var cutFrom = $('<textarea/>');
-    cutFrom.id = "sandbox";
-    $('body').append(cutFrom);
-    var result = '';
-    cutFrom.val('').select();
-    if (document.execCommand('paste')) {
-        result = cutFrom.val();
-    }
-    cutFrom.val('');
-    cutFrom.remove();
-    return result;
-}
-
-function copyTextToClipboard(text) {
-    "use strict";
-    var copyFrom = $('<textarea/>');
-    copyFrom.text(text);
-    $('body').append(copyFrom);
-    copyFrom.select();
-    document.execCommand('copy');
-    copyFrom.remove();
-}
-
 chrome.runtime.onMessage.addListener(
     function (request, sender, sendResponse) {
         "use strict";
