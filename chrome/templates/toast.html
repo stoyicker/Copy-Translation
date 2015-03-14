@@ -1,1 +1,9 @@
-<div class='toast' style='display:none'>Hola</div>
+<div class='toast' style='display:none'>Translation copied.
+    <button class="undobutton" onclick="onUndoRequested()">UNDO</button>
+</div>
+<script>
+    function onUndoRequested() {
+        "use strict";
+        copyTextToClipboard(oldClipboardText);
+    }
+</script>

@@ -13,10 +13,16 @@ chrome.runtime.onMessage.addListener(
     }
 );
 
+function showToast() {
+    "use strict";
+    $('.toast').clearQueue().finish().fadeIn(400).delay(3000).fadeOut(400);
+}
+
 resultBox.addEventListener("DOMNodeInserted", function () {
     "use strict";
     copyTextToClipboard(resultBox.innerText);
     srcBox.focus();
+    showToast();
 }, false);
 
 chrome.runtime.sendMessage({
