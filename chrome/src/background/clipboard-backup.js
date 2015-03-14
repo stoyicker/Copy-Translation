@@ -6,9 +6,7 @@ var requestBackup = function (activeInfo) {
         currentWindow: true
     }, function (tabs) {
         chrome.tabs.sendMessage(tabs[0].id, {
-            request: "backup"
-        }, function (response) {
-            console.log("Performed clipboard backup.");
+            request: "clipboard_backup"
         });
     });
 };

@@ -7,19 +7,8 @@ var srcBox = document.getElementById("source"),
 chrome.runtime.onMessage.addListener(
     function (message, sender, sendResponse) {
         "use strict";
-        if (message.request === "backup") {
-            console.log("Received a backup request");
+        if (message.request === "backup_clipboard") {
             oldClipboardText = readClipboard();
-            console.log("Clipboard contents stored: " + oldClipboardText);
-        }
-    }
-);
-
-chrome.runtime.onMessage.addListener(
-    function (message, sender, sendResponse) {
-        "use strict";
-        if (message.request === "file_retrieved") {
-            alert("File contents: " + message.data);
         }
     }
 );
@@ -31,6 +20,20 @@ resultBox.addEventListener("DOMNodeInserted", function () {
 }, false);
 
 chrome.runtime.sendMessage({
-    request: "retrieve_file",
+    request: "insert_css",
+    fileName: "css/toast.css"
+});
+
+chrome.runtime.sendMessage({
+    request: "retrieve_url",
     fileName: "templates/toast.html"
+}, function (url) {
+    "use strict";
+    $.ajax({
+        url: url,
+        dataType: "html",
+        success: function (contents) {
+            $("body").append(contents);
+        }
+    });
 });

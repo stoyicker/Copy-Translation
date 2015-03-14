@@ -1,9 +1,11 @@
 {
     "name": "Copy Translation",
-    "version": "4",
+    "version": "5",
     "manifest_version": 2,
     "permissions": [
-        "*://translate.google.com/*"
+        "tabs",
+        "http://*/",
+        "https://*/"
     ],
     "description": "Have your translations automatically copied to the clipboard!",
     "icons": {
@@ -14,10 +16,8 @@
     },
     "background": {
         "scripts": [
-            "src/common/jquery-2.1.3.min.js",
             "src/background/clipboard-backup.js",
-            "src/background/file-retriever.js",
-            "src/background/toast-css.js"
+            "src/background/background-services.js"
         ]
     },
     "author": "Jorge Antonio Diaz-Benito Soriano",
