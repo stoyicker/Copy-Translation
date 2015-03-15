@@ -1,9 +1,30 @@
-<div class='toast' style='display:none'>Translation copied.
-    <button class="undobutton" onclick="onUndoRequested()">UNDO</button>
+<div class='toast' style='display:none;
+        width: 300px;
+        height: auto;
+        margin: 0 auto;
+        bottom: 50px;
+        background-color: #383838;
+        color: #F0F0F0;
+        font-family: Calibri;
+        font-size: 20px;
+        padding: 20px;
+        border-radius: 2px;
+        z-index: 999;
+        -webkit-box-shadow: 0px 0px 24px -1px rgba(56, 56, 56, 1);
+        -moz-box-shadow: 0px 0px 24px -1px rgba(56, 56, 56, 1);
+        box-shadow: 0px 0px 24px -1px rgba(56, 56, 56, 1);'>Translation copied.
+    <button id="undobutton" class="undobutton" style="
+    color: #ff9800;
+    text-align: right;
+    font-weight: bold;
+    position: relative;
+    background: none;
+    float:right;
+    background-color: Transparent;
+    background-repeat:no-repeat;
+    border: none;
+    cursor: pointer;
+    cursor: hand;
+    overflow: hidden;
+    outline: none;">UNDO</button>
 </div>
-<script>
-    function onUndoRequested() {
-        "use strict";
-        copyTextToClipboard(oldClipboardText);
-    }
-</script>

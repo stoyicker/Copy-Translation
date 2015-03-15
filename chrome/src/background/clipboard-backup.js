@@ -6,7 +6,7 @@ var requestBackup = function (activeInfo) {
         currentWindow: true
     }, function (tabs) {
         chrome.tabs.sendMessage(tabs[0].id, {
-            request: "clipboard_backup"
+            request: "backup_clipboard"
         });
     });
 };

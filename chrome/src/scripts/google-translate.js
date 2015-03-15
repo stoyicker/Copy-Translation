@@ -2,7 +2,8 @@
 
 var srcBox = document.getElementById("source"),
     resultBox = document.getElementById("result_box"),
-    oldClipboardText;
+    oldClipboardText,
+    toastShowing = false;
 
 chrome.runtime.onMessage.addListener(
     function (message, sender, sendResponse) {
@@ -15,7 +16,12 @@ chrome.runtime.onMessage.addListener(
 
 function showToast() {
     "use strict";
-    $('.toast').clearQueue().finish().fadeIn(400).delay(3000).fadeOut(400);
+    if (!toastShowing) {
+        toastShowing = true;
+        $('.toast').stop().fadeIn(400).delay(3000).fadeOut(400, function () {
+            toastShowing = false;
+        });
+    }
 }
 
 resultBox.addEventListener("DOMNodeInserted", function () {
@@ -25,10 +31,11 @@ resultBox.addEventListener("DOMNodeInserted", function () {
     showToast();
 }, false);
 
-chrome.runtime.sendMessage({
-    request: "insert_css",
-    fileName: "css/toast.css"
-});
+function onUndoRequested() {
+    "use strict";
+    copyTextToClipboard(oldClipboardText);
+    $('.toast').stop().clearQueue().fadeOut(400);
+}
 
 chrome.runtime.sendMessage({
     request: "retrieve_url",
@@ -40,6 +47,7 @@ chrome.runtime.sendMessage({
         dataType: "html",
         success: function (contents) {
             $("body").append(contents);
+            document.getElementById("undobutton").addEventListener('click', onUndoRequested);
         }
     });
 });
