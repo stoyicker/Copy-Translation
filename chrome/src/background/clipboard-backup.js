@@ -5,6 +5,7 @@ var requestBackup = function (activeInfo) {
         active: true,
         currentWindow: true
     }, function (tabs) {
+        if(typeof tabs != "undefined")
         chrome.tabs.sendMessage(tabs[0].id, {
             request: "backup_clipboard"
         });
