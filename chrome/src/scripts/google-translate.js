@@ -46,7 +46,9 @@ chrome.runtime.sendMessage({
         url: url,
         dataType: "html",
         success: function (contents) {
-            $("body").append(contents);
+            var wrapper = document.createElement('div');
+            wrapper.innerHTML = contents;
+            document.body.appendChild(wrapper.firstChild);
             document.getElementById("undobutton").addEventListener('click', onUndoRequested);
         }
     });
